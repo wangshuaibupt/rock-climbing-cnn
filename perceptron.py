@@ -20,7 +20,16 @@ import numpy as np
 
 def activation(x):
     """激活函数"""
-    return x
+    # return x
+    return 1 if x > 0 else 0
+
+
+def activation_list(x_list):
+    """列表每个元素都使用激活函数"""
+    out = []
+    for i in range(0, len(x_list)):
+        out.append(activation(x_list[i]))
+    return out
 
 
 class VectorOP(object):
@@ -107,28 +116,15 @@ class Perceptron(object):
 
 
 if __name__ == '__main__':
-    # 自动生成样本
-    trains_features = np.random.rand(1000, 10)
-    test_w = np.random.randint(1, 10, (10, 1))
-    test_bia = random.randint(1, 100)
-    trains_lables = np.dot(trains_features, test_w) + test_bia
 
-    # 样本格式转化
-    trains_features_list = trains_features.tolist()
-    trains_lables_list_tmp = trains_lables.tolist() 
-    trains_lables_list = []
-    for i in range(len(trains_lables_list_tmp)):
-        trains_lables_list.append(trains_lables_list_tmp[i][0])
-
-    # 初始化参数
-    features = trains_features
-    lables = trains_lables_list
-    iterations = 100
+    features = [[1, 1, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [0, 0, 1], [0, 1, 0], [1, 0, 0], [0, 0, 0]]
+    lables = [1, 0, 0, 0, 0, 0, 0, 0]
+    iterations = 1000
     learning_rate = 0.1
     p_obj = Perceptron(features, lables, iterations, learning_rate, activation)
     p_obj.train()
     print ("权重矩阵预测值：{w}".format(w=p_obj.w))
     print ("偏置量预测值：{bia}".format(bia=p_obj.bia))
-    print ("权重矩阵真值：{w}".format(w=test_w.tolist()))
-    print ("偏置量真值：{bia}".format(bia=test_bia))
-    print p_obj.predict([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0])
+    print p_obj.predict([1.0, 1.0, 1.0])
+    print p_obj.predict([1.0, 0.0, 1.0])
+    print p_obj.predict([0.0, 1.0, 1.0])
