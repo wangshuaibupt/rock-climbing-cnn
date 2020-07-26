@@ -6,8 +6,6 @@
 # 
 ################################################################################
 """
-line_cf.py
-线性单元
 Authors: wangshuaibupt(wangshuaibupt@126.com)
 Date:    2020/07/25 14:57:06
 """
@@ -24,8 +22,8 @@ def sigmoid(x):
 
 def activation(x):
     """激活函数"""
-    return sigmoid(x)
-    # return x
+    # return sigmoid(x)
+    return x
 
 
 def activation_list(x_list):
