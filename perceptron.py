@@ -19,7 +19,7 @@ import numpy as np
 
 
 def activation(x):
-    """"""
+    """激活函数"""
     return x
 
 
