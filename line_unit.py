@@ -17,9 +17,15 @@ import perceptron
 import numpy as np
 
 
+def sigmoid(x):
+    s = 1 / (1 + np.exp(-x))
+    return s
+
+
 def activation(x):
     """激活函数"""
-    return x
+    return sigmoid(x)
+    # return x
 
 
 def activation_list(x_list):
@@ -44,9 +50,9 @@ class LineCF(perceptron.Perceptron):
 
 if __name__ == '__main__':
     # 自动生成样本
-    trains_features = np.random.rand(1000, 10)
-    test_w = np.random.randint(-10, 10, (10, 1))
-    test_bia = random.randint(1, 100)
+    trains_features = np.random.rand(1000, 10) - 0.5
+    test_w = np.random.rand(10, 1) - 0.5 
+    test_bia = 0.0 
     trains_lables = np.dot(trains_features, test_w) + test_bia
 
     # 样本格式转化
@@ -68,5 +74,4 @@ if __name__ == '__main__':
     print ("偏置量预测值：{bia}".format(bia=p_obj.bia))
     print ("权重矩阵真值：{w}".format(w=test_w.tolist()))
     print ("偏置量真值：{bia}".format(bia=test_bia))
-
     print (p_obj.predict([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]))
